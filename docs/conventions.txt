@@ -1,0 +1,17 @@
+Conventions:
+
+- Objects that are created via createjs have the prefix "createjs"
+- Elements from the stage that have a representation in the html-dom have the id: <element-type>_<id>, e.g. "layer_1"
+
+"Elements"
+- each element (text, shape, image) has a property createjsShape, which is the shape representation of easeljs (see above)
+	properties that can be derived directly from this object are not defined redundantly in the element-object. Example: x/y-position
+	properties such as color are defined specifically
+- each element has the functions: 
+		toJson() 	-> turns the object to json
+		toModel() 	-> turns json into the object
+		toHtml() 	-> returns the html-representation of the element 
+		redraeGraphic() -> called when a property changes that requires the graphic to be redrawn
+		getELementProp() -> returns the "type" of the element e.g. "circle" or "rect"
+
+- Containers have a "HashMap" "elements" where the key is the element id in quotation marks and the value the element itself. Also "elements" has an array with the key "ids" with all ids at the correct index. the top element is in front

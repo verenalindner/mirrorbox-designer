@@ -1,0 +1,179 @@
+{
+	"circle": {
+		"id": -1,
+		"x": 100,
+		"y": 100,
+		"elemIndex": 0,
+		"shape": {
+			"fill": true,	
+			"stroke": {
+				"stroke": false,
+                "strokeStyle": 2,
+            }, 				
+			"circle": {
+				"radius": 50
+			}						
+		},
+		"transformations": {
+			"alpha": 1,	
+			"scaleX": 1,
+			"scaleY": 1,
+			"rotation": 0		
+		}
+	},
+
+	"rect":	{	
+		"id": -1,
+		"x": 50,
+		"y": 50,
+		"elemIndex": 1,
+		"shape": {
+			"fill": true,
+			"stroke": {
+				"stroke": false,
+                "strokeStyle": 2,
+            }, 
+			"rect": {
+				"w": 80,
+				"h": 80,
+				"cornerRadius": 1
+			}
+		},
+		"transformations": {
+			"alpha": 1,	
+			"scaleX": 1,
+			"scaleY": 1,
+			"rotation": 0	
+		}
+	},
+	"polystar":	{		
+		"id": -1,
+		"x": 100,
+		"y": 100,
+		"elemIndex": 2,
+		"shape": {
+			"fill": true,
+			"stroke": {
+				"stroke": false,
+                "strokeStyle": 2,
+            }, 
+			"polystar": {
+				"radius": 75,
+				"sides": 5,
+				"pointSize": 0.6,
+				"angle": -90
+			}
+		},
+		"transformations": {
+			"alpha": 1,	
+			"scaleX": 1,
+			"scaleY": 1,
+			"rotation": 0		
+		}				
+	},
+	"img": {
+		"id": -1,
+		"x": 100,
+		"y": 100,
+		"elementIndex": 3,				
+		"image": {
+			"src": ""
+		},
+		"transformations": {
+			"alpha": 1,	
+			"scaleX": 1,
+			"scaleY": 1,
+			"rotation": 0		
+		}						
+	},
+	"text": {
+		"id": -1,
+		"x": 100,
+		"y": 100,			
+		"text": {
+			"value": "text",
+			"color": "#000",
+			"fontSize": 50,
+			"fontStyle": "Arial, sans-serif",
+			"bold": false,
+			"italic": false,
+			"align": "left"
+		},
+		"transformations": {
+			"alpha": 1,	
+			"scaleX": 1,
+			"scaleY": 1,
+			"rotation": 0		
+		}						
+	},
+	"halfCircle": {
+		"id": -1,
+		"x": 100,
+		"y": 100,
+		"elemIndex": 0,
+		"shape": {
+			"fill": true,	
+			"stroke": {
+				"stroke": false,
+                "strokeStyle": 2,
+            }, 				
+			"halfCircle": {
+				"radius": 50
+			}						
+		},
+		"transformations": {
+			"alpha": 1,	
+			"scaleX": 1,
+			"scaleY": 1,
+			"rotation": 0		
+		}						
+	}, 
+	"triangle": {
+		"id": -1,
+		"x": 100,
+		"y": 100,
+		"shape": {
+			"fill": true,
+			"stroke": {
+				"stroke": false,
+                "strokeStyle": 2,
+            }, 
+			"polystar": {
+				"radius": 75,
+				"sides": 3,
+				"pointSize": 0.5,
+				"angle": -90
+			}
+		},
+		"transformations": {
+			"alpha": 1,	
+			"scaleX": 1,
+			"scaleY": 1,
+			"rotation": 0		
+		}						
+	},
+	"line": {
+		"id": -1,
+		"x": 50,
+		"y": 50,
+		"elemIndex": 1,
+		"shape": {
+			"line": {
+            "strokeStyle": 4,
+            "points": [{
+                "x": 100,
+                "y": 100
+            }, {
+                "x": 100,
+                "y": 300
+            }, ]
+        }
+		},
+		"transformations": {
+			"alpha": 1,	
+			"scaleX": 1,
+			"scaleY": 1,
+			"rotation": 0	
+		}					
+	}
+}

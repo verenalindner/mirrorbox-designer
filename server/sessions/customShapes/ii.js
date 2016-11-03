@@ -1,0 +1,1 @@
+{"name":"ii","customShape":{"id":5,"x":92.95209315151749,"y":102.34119675314305,"elemIndex":1,"shape":{"color":"#0d1163","fill":true,"stroke":{"isStroke":true,"strokeColor":"#ff009d","strokeStyle":2},"polystar":{"radius":"76","sides":"10","pointSize":"0.8","angle":-90}},"transformations":{"alpha":1,"scaleX":1,"scaleY":1,"rotation":0}}}

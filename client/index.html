@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>MirrorBox Designer</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.9">
+    
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<link href="http://fonts.googleapis.com/css?family=Kite+One" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Alegreya+Sans+SC" rel="stylesheet" type="text/css">
+	
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link href="css/start-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css">
+
+	<!--createjs
+	<script src="js/libs/jquery-ui-1.10.4/jquery-1.10.2.js"></script> -->
+	<script src="js/libs/createjs-2013.12.12.min.js"></script> 
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/libs/prototype.js"></script>  
+
+  	<script src="js/libs/jquery-1.9.1.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  	<script src="js/libs/jquery.ui.touch-punch.min.js"></script>
+
+  	<!--<script src="js/libs/jquery-sortable.js"></script>-->
+
+  	<!-- colorpicker -->
+	<script src='js/libs/colorpicker/js/colpick.js'></script>
+	<link rel='stylesheet' href='js/libs/colorpicker/css/colpick.css' />
+
+	<script src="js/state.js"></script>
+	<script src="js/controller/viewInitializer.js"></script> 
+	<script src="js/selectedElement.js"></script>
+
+	<script src="js/model/stage.js"></script> 
+	<script src="js/model/layer.js"></script> 
+	<script src="js/model/element.js"></script> 
+	<script src="js/model/rect.js"></script> 
+	<script src="js/model/circle.js"></script> 
+	<script src="js/model/polystar.js"></script> 
+	<script src="js/model/line.js"></script>
+	<script src="js/model/halfCircle.js"></script> 
+	<script src="js/model/text.js"></script>
+	<script src="js/model/image.js"></script>
+	<script src="js/model/group.js"></script>
+
+	<script src="js/htmlTags.js"></script>  
+	<script src="js/controller/requestBase.js"></script> 
+
+	<script src="js/controller/editController.js"></script> 
+	<script src="js/controller/viewController.js"></script> 
+	<script src="js/parser.js"></script>
+
+	<script src="js/index.js">	</script>
+
+</head>
+
+<body onload="init()">	
+	<div id="upperControl">
+		<span id="headline">MirrorBox Designer </span>
+		<button id="newbutton" type="button">New</button>
+		<button id="loadbutton" type="button">Load</button>
+		<button id="savebutton" type="button">Save</button>
+		<input type="checkBox" id="check" onchange="changeView(this.checked)"><label for="check">StapleView</label>
+	</div>
+	<div id="wrapper">		
+		<div id="content">
+			<div id="top"> 
+				
+				<div id="tabs-min">
+					<ul>
+						<li><a href="#generalSettings">File</a></li>
+						<li><a href="#viewSettings">View</a></li>
+						<li><a href="#editSettings">Edit</a></li>
+						<li><a href="#arrangementSettings">Arrange</a></li>
+					</ul>
+					<div id="generalSettings" class="settingsTab">
+						<figure id="newIcon" class="iconTextBig">
+							<img src="./img/gui/appbar.page.bold.png" alt="new">
+							<figcaption>New</figcaption>
+						</figure>
+						<figure id="saveIcon" class="iconTextBig">
+							<img src="./img/gui/appbar.save.png" alt="save">
+							<figcaption>Save</figcaption>
+						</figure>
+						<figure id="saveAsIcon" class="iconTextBig">
+							<img src="./img/gui/appbar.save_as.png" alt="save as">
+							<figcaption>Save As ...</figcaption>
+						</figure>
+						<figure id="loadIcon" class="iconTextBig">
+							<img src="./img/gui/appbar.folder.open.png" alt="load">
+							<figcaption>Load</figcaption>
+						</figure>
+						<div class="break"></div>						
+					</div>
+
+					<div id="arrangementSettings" class="settingsTab">
+						<div class="editGroupContainer" id="arrangementSettings">	
+							<h3>Arrangement</h3>
+							<div class="editGroup">
+								<div class="editGroupColumn">
+									<img id="oneForward" alt="Bring One Forward" src="./img/gui/appbar.layer.arrange.bringforward.png">
+								</div>
+								<div class="editGroupColumn">
+									<img id="oneBackward" alt="Send one Backward" src="./img/gui/appbar.layer.arrange.sendbackward.png">
+								</div>
+								<div class="editGroupColumn">
+									<img id="toFront" alt="Bring to Front" src="./img/gui/appbar.layer.arrange.bringtofront.png">
+								</div>
+								<div class="editGroupColumn">
+									<img id="toBack" alt="Send to Back" src="./img/gui/appbar.layer.arrange.sendtoback.png">
+								</div>
+								<div class="break"></div>
+							</div>	
+						</div>
+						<figure id="groupElements" class="iconTextBig">
+							<img src="./img/gui/appbar.vector.group.png" alt="group">
+							<figcaption>Group Elements</figcaption>
+						</figure>
+
+						<figure id="ungroupElements" class="iconTextBig">
+							<img src="./img/gui/appbar.vector.group.removed.png" alt="ungroup">
+							<figcaption>Ungroup Elements</figcaption>
+						</figure>
+						
+						<figure id="newCustomShape" class="iconTextBig">
+							<img src="./img/gui/appbar.star.add.png" alt="save as">
+							<figcaption>Add as Custom Shape</figcaption>
+						</figure>
+
+						<figure id="duplicateElement" class="iconTextBig">
+							<img src="./img/gui/appbar.page.copy.png" alt="dublicate">
+							<figcaption>Duplicate Element</figcaption>
+						</figure>
+						<div class="break"></div>						
+					</div>
+
+
+					<div id="editSettings" class="settingsTab">		
+						<h3>No Element selected</h3>		
+						<div style="clear:both"></div>
+					</div>
+
+					<div id="viewSettings" class="settingsTab">
+						<div class="editGroupContainer">	
+							<h3>Zoom</h3>
+							<div class="editGroup">
+								<div id="zoomIn" class="editGroupColumn">
+									<img src="./img/gui/appbar.magnify.add.png">
+								</div>
+								<div id="zoomNormal" class="editGroupColumn">
+									<img src="./img/gui/appbar.magnify.png">
+								</div>
+								<div id="zoomOut" class="editGroupColumn">
+									<img src="./img/gui/appbar.magnify.minus.png">
+								</div>
+								<div class="break"></div>
+							</div>	
+						</div>
+
+						<div class="editGroupContainer">	
+							<h3>Layers</h3>
+							<div class="editGroup">
+								<div class="editGroupColumn">
+									<div class="editGroupItem">
+										<input type="checkbox" id="showStaple" class="visibleToggle" name="font_style">
+										<label for="showStaple">
+											<img src="./img/gui/appbar.staple.png">
+										</label>
+										<h3>Show as staple</h3>
+									</div>
+								</div>
+								<div class="editGroupColumn">
+									<div class="editGroupItem">				
+										<input type="checkbox" id="showLayerBorder" class="visibleToggle" name="font_style" checked>
+										<label for="showLayerBorder">
+											<img src="./img/gui/appbar.eye.hide.png">
+										</label>
+										<h3>Hide Layer Borders</h3>
+									</div>
+								</div>
+								<div style="clear:both"></div>
+							</div>	
+						</div>
+
+						<div class="editGroupContainer">	
+							<h3>Reference Lines</h3>
+							<div class="editGroup">
+								<div class="editGroupColumn">
+									<div class="editGroupItem" id="hReferenceLine">
+										<input type="button" id="addHLines" class="visibleToggle">
+										<label for="addHLines">
+											<img id="hReferenceLineImg" src="./img/gui/appbar.reference.all.png">
+										</label>
+										<h3>Add Horizontal</h3>
+									</div>
+								</div>
+								<div class="editGroupColumn">
+									<div class="editGroupItem" id="vReferenceLine">
+										<input type="button" id="addVLines" class="visibleToggle">
+										<label for="addVLines">
+											<img id="vReferenceLineImg" src="./img/gui/appbar.referenceV.png">
+										</label>
+										<h3>Add Vertical</h3>
+									</div>
+								</div>
+								<div class="editGroupColumn">
+									<div class="editGroupItem" id="showLinesItem">
+										<input type="checkbox" id="showLines" class="visibleToggle">
+										<label for="showLines">
+											<img src="./img/gui/appbar.eye.hide.png">
+										</label>
+											<h3>Hide Reference Lines</h3>
+									</div>
+								</div>
+							<!--	<div class="editGroupColumn">
+									<div class="editGroupItem">
+										<input type="checkbox" id="showDuplicateLines" class="visibleToggle" name="font_style">
+										<label for="showDuplicateLines">
+											<img src="./img/gui/appbar.reference.all.png">
+										</label>
+										<h3>Duplicate on Layers</h3>
+									</div>
+								</div>-->
+								<div class="break"> </div>
+							</div>	
+						</div>
+
+						<div style="clear:both"></div>
+					</div>
+				</div>	
+			</div>
+			<div id="leftPanel" class="resizable">
+				<div class="controls">
+					<div id="tools" class="break">
+						<div class="collapsible">Vector Shapes and Text<span class="indicator ui-icon ui-icon-white ui-icon-triangle-1-s
+ "></span></div>
+						<div id="toolsImgContainer" class="imgContainer">
+							
+						</div>
+					</div>	
+					<div id="guiElements" class="break">
+						<div class="collapsible">UI Elements<span class="indicator ui-icon ui-icon-white ui-icon-triangle-1-s
+ "></span></div>
+						<div id="guiImgContainer" class="imgContainer">
+							
+						</div>
+					</div>	
+					<div id="uiElems" class="break">
+						<div class="collapsible">UI Icons<span class="indicator ui-icon ui-icon-white ui-icon-triangle-1-s
+ "></span></div>
+						<div id="iconImgContainer" class="imgContainer">
+							
+						</div>
+					</div>
+					<div id="customShapes" class="break">
+						<div class="collapsible">Custom Shapes<span class="indicator ui-icon ui-icon-white ui-icon-triangle-1-s
+ "></span></div>
+						<div id="customShapeContainer" class="imgContainer">
+
+						</div>
+					</div>
+
+					<div id="customImgs" class="break">
+						<div class="collapsible">Custom Images<span class="indicator ui-icon ui-icon-white ui-icon-triangle-1-s
+ "></span></div>
+						
+						<form id="uploadForm"
+					          enctype="multipart/form-data">
+					      <input type="file" id="uploadFile" multiple="multiple" name="Image" />
+					    </form>
+					    <progress></progress>
+
+
+
+						<div id="customImgContainer" class="imgContainer">
+							
+						</div>
+					</div>	
+				</div>	
+			</div>
+			<div id="canvasContainer">
+			<!--	<canvas id="helperCanvas"> " "</canvas>-->
+				<canvas id="canvas" width="473" height="621">Sorry, your browser doesn't support the Canvas element :(</canvas>
+			</div>
+			<div id="rightPanel" class="resizable">
+				<canvas id="preview"> preview Canvas</canvas>
+				<div class="colorbox">
+					<div class="currentColor">
+
+					</div>
+				
+					<div class="color" style="background-color: hotpink"> </div>
+					<div class="color" style="background-color: lightgreen">  </div>
+					<div class="color" style="background-color: lightskyblue">  </div>
+					<div class="color" style="background-color: mediumblue">  </div>
+					<div class="color" style="background-color: darkorchid">  </div>
+		
+			</div>
+				<div id="layers">
+					<div class="collapsible">Layers</div>
+					<div id="sortableLayers">
+						<div class='layer' id='layerTest'>
+							<div class="visibleToggle">
+								<img src="../img/GUI/appbar.eye.png" alt="hide"> 
+							</div> 
+							<div class='select'>
+							 	<h3>LayerName</h3>
+							 </div>
+						</div>
+					</div>
+					<button class="plus" type="button" onclick="newLayer()">New Layer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="dialog" id="newDialog" title="New Document">
+	  	<p>Please set a name for the new Session.</p>
+	  	<div>
+	  		<input type="textfield" value=""/>
+	  	</div>
+	</div>
+
+	<div class="dialog" id="saveAsDialog" title="Save as...">
+	  	<p>Please set a Name</p>
+	  	<div>
+	  		<input type="textfield" value=""/>
+	  	</div>
+	</div>
+
+	<div class="dialog" id="saveDialog" title="Save Session">
+	  	<p>Do you want to save your current Session First?</p>
+	</div>
+
+	<div class="dialog" id="loadDialog" title="Load Session">
+		<p>Please select the session you want to load:</p>
+		<form>
+		</form>
+	</div>
+
+	<div class="dialog" id="shapeDialog" title="Shape Name">
+	  	<p>Please set a name for the new Element.</p>
+	  	<div>
+	  		<input type="textfield" value=""/>
+	  	</div>
+	</div>
+
+
+</body>
+
+</html>

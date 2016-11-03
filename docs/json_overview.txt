@@ -1,0 +1,215 @@
+JSON
+
+I. ClientI -> Server -> ClientII
+
+1.Updates
+	{
+		"update": []
+	}
+
+	1.1	Layer Update - only changes the index of Layers
+	{
+		"update": [
+			{
+				"layerId": 5,
+				"layerIndex": 2,
+			}
+		]
+	}
+
+	1.2 Element Update - redraws the whole Element
+	{
+		"update": [
+			{
+				"layerId": 5,
+			    "elementId": 1,
+			    "elemnet": {    	
+					"id": 1,
+					"x": 400,
+					"y": 400,
+					"elemIndex": 0,
+					"shape": {
+						"color": "#ABECE2",	
+						"fill": true,					
+						"circle": {
+							"radius": 110
+						}						
+					},
+					"transformations": {
+						"alpha": 1,	
+					}																							
+				}		    
+			},
+		]
+	}
+
+	1.3 Element Transformation Update - only sets Element-Transformations (no redrawing required)
+	{
+		"update": [
+			{
+				"layerId": 5,
+			    "elementId": 1,
+			    "element": {    	
+					"id": 1,
+					"transformations": #{
+						"alpha": 1,	
+					}																							
+				}		    
+			},
+		]
+	}
+
+	1.4 ElementIndex changed
+	{
+		"update": [
+			{
+				"layerId": 5,
+			    "elementId": 1,
+			    "action": "oneForward, oneBackward, toFront, toBack"	    
+			},
+		]
+	}
+
+	1.5 ElementIndex changed
+	{
+		"update": [
+			{
+				"layerId": 5,
+			    "elementId": 1,
+			    "newLayerIndex": 2
+			},
+		]
+	}
+
+2. Adds
+	
+	2.1 Adding of Layers
+	{
+		"add": [
+			{
+				"layerId": 6,
+				"layerIndex": 4,
+			}
+		]
+
+	}
+
+	2.2 Adding of Elements
+	{
+		"add": [
+			{
+				"layerId": 5,
+			    "elementId": 1,
+			    "element": {    	
+					"id": 1,
+					"x": 400,
+					"y": 400,
+					"elemIndex": 0,
+					"shape": {
+						"color": "#ABECE2",	
+						"fill": true,					
+						"circle": {
+							"radius": 110
+						}						
+					},
+					"transformations": {
+						"alpha": 1,	
+					}																							
+				}		    
+			},
+		]
+	}
+
+3. Removes
+	{
+		"remove": [
+			{
+				"layerId": 5,
+			}
+			{
+				"layerId": 5,
+				"elementId": 3,
+			}
+		]
+	}
+
+4. Save - send the whole Stage the way it will be stored
+
+{
+	"stage": {
+		"w": 1200,
+		"h": 800,
+		"layers": [
+			{
+				"id": 5,
+				"elements": [
+					{
+						...
+					}
+				]
+			}
+		]
+	}
+}
+
+II. ClientI -> Server -> ClientI
+
+1. Change Session Default Settings 
+	(only what should be changed is sent)
+	{
+		"color": "#ff00ff",
+		"currentFile": "./sessions/..",
+		"layerInfo": {
+			w: 300,
+			h: 340
+		}
+	}
+
+2. Change Element Default Settings
+	{
+		"changeSettings": [
+			"circle": {
+				"id": -1,
+				"x": 100,
+				"y": 100,
+				"elemIndex": 0,
+				"shape": {
+					"fill": true,					
+					"circle": {
+						"radius": 50
+					}						
+				},
+				"transformations": {
+					"alpha": 1,	
+				}
+			},
+			"rect": {...},
+			"polystar": {...},
+			"img": {...},
+			"text": {...}
+		]
+	}
+
+3. New Custom Shape
+	{
+		"customShape": {
+			"group": 
+		}
+	}
+
+III. Server -> ClientI
+
+1. get the default settings of Elements
+
+2. get the sessions
+	{
+		sessions: [
+			{"name": "session1"},
+			{"name": "session2"},
+			...
+		]
+	}
+	
+
+
+
